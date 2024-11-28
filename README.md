@@ -1,3 +1,3 @@
-# UserManagement
+# Stream: UserManagement_Stream
 
-Repository for project area 'UserManagement'.
+This branch corresponds to the stream 'UserManagement_Stream'.
