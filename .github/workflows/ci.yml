@@ -34,7 +34,6 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Run Unit Tests
-        working-directory: ./UserManagement
         run: mvn clean test
 
   sonarqube:
