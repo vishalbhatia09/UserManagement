@@ -65,10 +65,10 @@ jobs:
         env:
           SONAR_HOST_URL: https://sonarcloud.io
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn sonar:sonar -Dsonar.organization='Vishal Bhatia' \
-                             -Dsonar.projectKey=vishalbhatia09_UserManagement \
-                             -Dsonar.projectName=UserManagement \
-		             -Dsonar.branch.name=UserManagement-Stream
+        run: mvn sonar:sonar -Dsonar.organization="vishalbhatia09" \
+                             -Dsonar.projectKey="vishalbhatia09_UserManagement" \
+                             -Dsonar.projectName="UserManagement" \
+                             -Dsonar.branch.name="UserManagement-Stream"
 
   build:
     name: Build Project
