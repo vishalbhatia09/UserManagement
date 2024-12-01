@@ -19,6 +19,19 @@ public class UserManager {
         return users.getOrDefault(id, "User not found.");
     }
 
+   // Add email for a user
+    public void addUserEmail(int id, String email) {
+        if (!users.containsKey(id)) {
+            throw new IllegalArgumentException("User ID does not exist.");
+        }
+        emails.put(id, email);
+    }
+
+    // Get email of a user
+    public String getUserEmail(int id) {
+        return emails.getOrDefault(id, "Email not found.");
+    }
+
     // Print all users
     public void printUsers() {
         System.out.print("User List:");

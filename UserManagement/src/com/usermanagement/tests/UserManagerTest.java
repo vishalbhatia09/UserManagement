@@ -55,7 +55,38 @@ public class UserManagerTest extends TestCase {
 
         userManager.printUsers(); // Call the method to print users
 
-        String expectedOutput = "User List:" + "ID: 1, Name: Alice" + "ID: 2, Name: Bob\n";
+        String expectedOutput = "User List:\nID: 1, Name: Alice, Email: No email added\nID: 2, Name: Bob, Email: No email added";
+
+        assertEquals(expectedOutput.trim(), outputStream.toString().trim());
+    }
+
+    // Test for adding an email to a user
+    public void testAddUserEmail() {
+        userManager.addUser(1, "Alice");
+        userManager.addUserEmail(1, "alice@example.com");
+
+        // Verify the email is added correctly
+        assertEquals("alice@example.com", userManager.getUserEmail(1));
+    }
+
+    public void testAddEmailForNonExistentUser() {
+        try {
+            userManager.addUserEmail(99, "unknown@example.com");
+            fail("Exception not thrown for non-existent user.");
+        } catch (IllegalArgumentException e) {
+            assertEquals("User ID does not exist.", e.getMessage());
+        }
+    }
+
+    public void testPrintUsersWithEmails() {
+        userManager.addUser(1, "Alice");
+        userManager.addUser(2, "Bob");
+
+        userManager.addUserEmail(1, "alice@example.com");
+
+        userManager.printUsers();
+
+        String expectedOutput = "User List:\nID: 1, Name: Alice, Email: alice@example.com\nID: 2, Name: Bob, Email: No email added";
 
         assertEquals(expectedOutput.trim(), outputStream.toString().trim());
     }
