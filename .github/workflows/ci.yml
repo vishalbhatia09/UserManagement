@@ -4,12 +4,12 @@ on:
   push:
     branches:
       - main
-      - UserManagement-Stream	
+      - UserManagement-Stream
   pull_request:
     branches:
       - main
       - UserManagement-Stream
-	
+
 jobs:
   unit-tests:
     name: Run Unit Tests
