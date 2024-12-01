@@ -10,7 +10,6 @@ on:
       - main
       - UserManagement-Stream
 	
-
 jobs:
   unit-tests:
     name: Run Unit Tests
