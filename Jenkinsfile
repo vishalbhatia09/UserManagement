@@ -50,7 +50,7 @@ pipeline {
                     mvn sonar:sonar ^
                         -Dsonar.organization=vishalbhatia09 ^
                         -Dsonar.host.url=https://sonarcloud.io ^
-                        -Dsonar.login=$SONAR_TOKEN ^
+                        -Dsonar.login=%SONAR_TOKEN% ^
                         -Dmaven.repo.local=C:\\ProgramData\\Jenkins\\.m2\\repository
                 '''
             }
