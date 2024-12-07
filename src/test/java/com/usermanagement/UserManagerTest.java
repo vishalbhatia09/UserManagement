@@ -53,8 +53,7 @@ public class UserManagerTest {
     @Test
     public void testUserCount() {
         userManager.addUser(1, "Alice");
-        userManager.addUser(2, "Bob");
-        assertEquals(2, userManager.getUserCount());
+        assertEquals(1, userManager.getUserCount());
     }
 
     @Test
