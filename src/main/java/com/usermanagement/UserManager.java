@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class UserManager {
     private Map<Integer, String> users = new HashMap<>();
+    private Map<Integer, String> emails = new HashMap<>();
 
     // Add a user
     public void addUser(int id, String name) {
@@ -19,7 +20,7 @@ public class UserManager {
         return users.getOrDefault(id, "User not found.");
     }
 
-   // Add email for a user
+    // Add email for a user
     public void addUserEmail(int id, String email) {
         if (!users.containsKey(id)) {
             throw new IllegalArgumentException("User ID does not exist.");
@@ -34,8 +35,10 @@ public class UserManager {
 
     // Print all users
     public void printUsers() {
-        System.out.print("User List:");
-        users.forEach((id, name) -> System.out.print("ID: " + id + ", Name: " + name));
+        System.out.println("User List:");
+        users.forEach(
+                (id, name) -> System.out
+                        .println("ID: " + id + ", Name: " + name + ", Email: " + getUserEmail(id)));
     }
 
     // Get the number of users

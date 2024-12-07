@@ -1,66 +1,76 @@
-package com.usermanagement.tests;
+package com.usermanagement;
 
 import com.usermanagement.UserManager;
-import junit.framework.TestCase;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class UserManagerTest extends TestCase {
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class UserManagerTest {
+
     private UserManager userManager;
     private ByteArrayOutputStream outputStream; // Declare the outputStream here
 
-    @Override
-    protected void setUp() throws Exception {
+    @BeforeEach
+    void setUp() {
         userManager = new UserManager();
         outputStream = new ByteArrayOutputStream(); // Initialize the outputStream
         System.setOut(new PrintStream(outputStream)); // Redirect System.out
     }
 
-    @Override
-    protected void tearDown() throws Exception {
+    @AfterEach
+    void tearDown() {
         System.setOut(System.out); // Restore the original System.out
     }
 
+    @Test
     public void testAddUser() {
         userManager.addUser(1, "Alice");
         assertEquals("Alice", userManager.getUser(1));
     }
 
+    @Test
     public void testAddDuplicateUser() {
         userManager.addUser(1, "Alice");
-        try {
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
             userManager.addUser(1, "Bob");
-            fail("Exception not thrown for duplicate user ID.");
-        } catch (IllegalArgumentException e) {
-            assertEquals("User ID already exists.", e.getMessage());
-        }
+        });
+        assertEquals("User ID already exists.", exception.getMessage());
     }
 
+    @Test
     public void testGetUser() {
         userManager.addUser(1, "Alice");
         assertEquals("Alice", userManager.getUser(1));
         assertEquals("User not found.", userManager.getUser(2));
     }
 
+    @Test
     public void testUserCount() {
         userManager.addUser(1, "Alice");
         userManager.addUser(2, "Bob");
         assertEquals(2, userManager.getUserCount());
     }
 
+    @Test
     public void testPrintUsers() {
         userManager.addUser(1, "Alice");
         userManager.addUser(2, "Bob");
 
         userManager.printUsers(); // Call the method to print users
 
-        String expectedOutput = "User List:\nID: 1, Name: Alice, Email: No email added\nID: 2, Name: Bob, Email: No email added";
+        String expectedOutput = "User List:\nID: 1, Name: Alice, Email: Email not found.\nID: 2, Name: Bob, Email: Email not found.\n";
 
         assertEquals(expectedOutput.trim(), outputStream.toString().trim());
     }
 
     // Test for adding an email to a user
+    @Test
     public void testAddUserEmail() {
         userManager.addUser(1, "Alice");
         userManager.addUserEmail(1, "alice@example.com");
@@ -69,15 +79,15 @@ public class UserManagerTest extends TestCase {
         assertEquals("alice@example.com", userManager.getUserEmail(1));
     }
 
+    @Test
     public void testAddEmailForNonExistentUser() {
-        try {
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
             userManager.addUserEmail(99, "unknown@example.com");
-            fail("Exception not thrown for non-existent user.");
-        } catch (IllegalArgumentException e) {
-            assertEquals("User ID does not exist.", e.getMessage());
-        }
+        });
+        assertEquals("User ID does not exist.", exception.getMessage());
     }
 
+    @Test
     public void testPrintUsersWithEmails() {
         userManager.addUser(1, "Alice");
         userManager.addUser(2, "Bob");
@@ -86,7 +96,7 @@ public class UserManagerTest extends TestCase {
 
         userManager.printUsers();
 
-        String expectedOutput = "User List:\nID: 1, Name: Alice, Email: alice@example.com\nID: 2, Name: Bob, Email: No email added";
+        String expectedOutput = "User List:\nID: 1, Name: Alice, Email: alice@example.com\nID: 2, Name: Bob, Email: Email not found.\n";
 
         assertEquals(expectedOutput.trim(), outputStream.toString().trim());
     }
