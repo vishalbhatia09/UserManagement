@@ -35,10 +35,10 @@ public class UserManager {
 
     // Print all users
     public void printUsers() {
-        System.out.println("User List:");
+        System.out.print("User List:");
         users.forEach(
                 (id, name) -> System.out
-                        .println("ID: " + id + ", Name: " + name + ", Email: " + getUserEmail(id)));
+                        .print("ID: " + id + ", Name: " + name + ", Email: " + getUserEmail(id) + ";"));
     }
 
     // Get the number of users

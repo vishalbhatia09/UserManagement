@@ -14,23 +14,23 @@ pipeline {
         stage('Download Dependencies') {
             steps {
                 echo 'Downloading dependencies...'
-                sh '''
-                    mvn dependency:go-offline -Dmaven.repo.local=/opt/jenkins/.m2/repository
+                bat '''
+                    mvn dependency:go-offline -Dmaven.repo.local=C:\\ProgramData\\Jenkins\\.m2\\repository
                 '''
             }
         }
         stage('Unit Test and Code Coverage') {
             steps {
                 echo 'Running Unit Tests...'
-                sh '''
-                    mvn clean test jacoco:prepare-agent jacoco:report -Dmaven.repo.local=/opt/jenkins/.m2/repository
+                bat '''
+                    mvn clean test jacoco:prepare-agent jacoco:report -Dmaven.repo.local=C:\\ProgramData\\Jenkins\\.m2\\repository
                 '''
             }
             post {
                 always {
                     echo 'Publishing Jacoco Report...'
                     publishHTML(target: [
-                        reportDir: 'target/site/jacoco',
+                        reportDir: 'target\\site\\jacoco',
                         reportFiles: 'index.html',
                         reportName: 'Jacoco Code Coverage'
                     ])
@@ -46,20 +46,20 @@ pipeline {
             }
             steps {
                 echo 'Running SonarQube Analysis...'
-                sh '''
-                    mvn sonar:sonar \
-                        -Dsonar.organization=vishalbhatia09 \
-                        -Dsonar.host.url=https://sonarcloud.io \
-                        -Dsonar.login=$SONAR_TOKEN \
-                        -Dmaven.repo.local=/opt/jenkins/.m2/repository
+                bat '''
+                    mvn sonar:sonar ^
+                        -Dsonar.organization=vishalbhatia09 ^
+                        -Dsonar.host.url=https://sonarcloud.io ^
+                        -Dsonar.login=$SONAR_TOKEN ^
+                        -Dmaven.repo.local=C:\\ProgramData\\Jenkins\\.m2\\repository
                 '''
             }
         }
         stage('Package') {
             steps {
                 echo 'Packaging the application...'
-                sh '''
-                    mvn clean package -DskipTests -Dmaven.repo.local=/opt/jenkins/.m2/repository
+                bat '''
+                    mvn clean package -DskipTests -Dmaven.repo.local=C:\\ProgramData\\Jenkins\\.m2\\repository
                 '''
             }
         }

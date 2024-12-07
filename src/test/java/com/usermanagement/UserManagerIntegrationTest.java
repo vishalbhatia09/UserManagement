@@ -41,7 +41,7 @@ public class UserManagerIntegrationTest {
         assertEquals("Alice", userManager.getUser(1));
         assertEquals("Bob", userManager.getUser(2));
 
-        String expectedOutput = "User List:\nID: 1, Name: Alice, Email: alice@example.com\nID: 2, Name: Bob, Email: Email not found.\n";
+        String expectedOutput = "User List:ID: 1, Name: Alice, Email: alice@example.com; ID: 2, Name: Bob, Email: Email not found.";
 
         // Print users to console
         userManager.printUsers();

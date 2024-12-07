@@ -64,7 +64,7 @@ public class UserManagerTest {
 
         userManager.printUsers(); // Call the method to print users
 
-        String expectedOutput = "User List:\nID: 1, Name: Alice, Email: Email not found.\nID: 2, Name: Bob, Email: Email not found.\n";
+        String expectedOutput = "User List:ID: 1, Name: Alice, Email: Email not found.;ID: 2, Name: Bob, Email: Email not found.;";
 
         assertEquals(expectedOutput.trim(), outputStream.toString().trim());
     }
@@ -96,7 +96,7 @@ public class UserManagerTest {
 
         userManager.printUsers();
 
-        String expectedOutput = "User List:\nID: 1, Name: Alice, Email: alice@example.com\nID: 2, Name: Bob, Email: Email not found.\n";
+        String expectedOutput = "User List:ID: 1, Name: Alice, Email: alice@example.com;ID: 2, Name: Bob, Email: Email not found.;";
 
         assertEquals(expectedOutput.trim(), outputStream.toString().trim());
     }
